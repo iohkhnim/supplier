@@ -1,18 +1,19 @@
 package com.khoi.supplier.dto;
 
+import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 import javax.persistence.Table;
 
-@Entity
+@Embeddable
 @Table(name = "supplier_product")
-public class Supplier_Product {
+public class Supplier_Product implements Serializable {
 
   @Column(name = "supplier_id")
   private
   int supplier_id;
 
-  @Column(name = "prodcut_id")
+  @Column(name = "product_id")
   private
   int product_id;
 
