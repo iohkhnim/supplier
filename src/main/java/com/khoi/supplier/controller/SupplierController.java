@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,7 +25,7 @@ public class SupplierController {
   @Autowired
   private ISuppProdService suppProdService;
   
-  @PostMapping("sp/create")
+  @PostMapping("sp")
   public ResponseEntity<Void> createSP(@RequestBody Supplier_Product sp) {
     Boolean flag = suppProdService.create(sp);
     if (flag.equals(true)) {
@@ -34,7 +35,7 @@ public class SupplierController {
     }
   }
 
-  @PostMapping("sp/update")
+  @PutMapping("sp/update")
   public ResponseEntity<Void> updateSP(@RequestBody Supplier_Product sp) {
     Boolean flag = suppProdService.update(sp);
     if (flag.equals(true)) {
