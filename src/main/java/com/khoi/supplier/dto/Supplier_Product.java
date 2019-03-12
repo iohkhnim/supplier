@@ -14,14 +14,14 @@ import javax.persistence.Table;
 public class Supplier_Product implements Serializable {
 
   @Id
-  @Column(name = "supplier_id")
-  private
-  int supplier_id;
+  @Column(name = "id")
+  private int id;
 
-  @Id
+  @Column(name = "supplier_id")
+  private int supplier_id;
+
   @Column(name = "product_id")
-  private
-  int product_id;
+  private int product_id;
 
   public int getSupplier_id() {
     return supplier_id;

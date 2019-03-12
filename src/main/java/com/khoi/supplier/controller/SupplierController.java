@@ -1,5 +1,6 @@
 package com.khoi.supplier.controller;
 
+import com.khoi.supplier.dao.ISupplierDAO;
 import com.khoi.supplier.dto.Supplier;
 import com.khoi.supplier.dto.Supplier_Product;
 import com.khoi.supplier.service.ISuppProdService;
@@ -25,7 +26,7 @@ public class SupplierController {
   @Autowired
   private ISuppProdService suppProdService;
   
-  @PostMapping("sp")
+  @PostMapping("sp/create")
   public ResponseEntity<Void> createSP(@RequestBody Supplier_Product sp) {
     Boolean flag = suppProdService.create(sp);
     if (flag.equals(true)) {
@@ -40,6 +41,16 @@ public class SupplierController {
     Boolean flag = suppProdService.update(sp);
     if (flag.equals(true)) {
       return new ResponseEntity<Void>(HttpStatus.CREATED);
+    } else {
+      return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+    }
+  }
+
+  @PutMapping("update")
+  public ResponseEntity<Void> update(@RequestBody Supplier supplier) {
+    Boolean flag = supplierService.update(supplier);
+    if (flag.equals(true)) {
+      return new ResponseEntity<Void>(HttpStatus.OK);
     } else {
       return new ResponseEntity<Void>(HttpStatus.CONFLICT);
     }

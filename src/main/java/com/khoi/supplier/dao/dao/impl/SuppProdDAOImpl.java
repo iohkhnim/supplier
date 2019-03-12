@@ -1,6 +1,7 @@
 package com.khoi.supplier.dao.dao.impl;
 
 import com.khoi.supplier.dao.ISuppProdDAO;
+import com.khoi.supplier.dto.Supplier;
 import com.khoi.supplier.dto.Supplier_Product;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,10 +15,15 @@ public class SuppProdDAOImpl implements ISuppProdDAO {
   @PersistenceContext
   private EntityManager entityManager;
 
+  public Supplier_Product findByid(int id) {
+    Supplier_Product sp = entityManager.find(Supplier_Product.class, id);
+    return sp;
+  }
+
   @Override
   public Boolean create(Supplier_Product sp) {
     try {
-      this.entityManager.persist(sp);
+      entityManager.persist(sp);
       return true;
     } catch (Exception ex) {
       return false;
@@ -27,7 +33,10 @@ public class SuppProdDAOImpl implements ISuppProdDAO {
   @Override
   public Boolean update(Supplier_Product sp) {
     try {
-      this.entityManager.merge(sp);
+      Supplier_Product sp_old = findByid(sp.getSupplier_id());
+      sp_old.setProduct_id(sp.getProduct_id());
+      sp_old.setSupplier_id(sp.getSupplier_id());
+      entityManager.merge(sp_old);
       return true;
     } catch (Exception ex) {
       return false;
