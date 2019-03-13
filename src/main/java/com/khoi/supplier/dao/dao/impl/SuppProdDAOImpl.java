@@ -51,4 +51,12 @@ public class SuppProdDAOImpl implements ISuppProdDAO {
     query.setParameter("supid", supplier_id);
     return (List<Integer>)query.getResultList();
   }
+
+  @Override
+  public List<Integer> getListSupplierIdByProductId(int product_id) {
+    String hql = "SELECT obj.supplier_id FROM Supplier_Product obj WHERE obj.product_id = :prodid";
+    Query query = entityManager.createQuery(hql);
+    query.setParameter("prodid", product_id);
+    return (List<Integer>)query.getResultList();
+  }
 }

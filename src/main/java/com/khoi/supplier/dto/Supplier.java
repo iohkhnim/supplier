@@ -1,6 +1,7 @@
 package com.khoi.supplier.dto;
 
 import com.khoi.basecrud.dto.baseDTO;
+import com.khoi.supplierproto.SupplierEntry;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -43,5 +44,11 @@ public class Supplier extends baseDTO implements Serializable {
 
   public void setProducts(List<String> products) {
     this.products = products;
+  }
+
+  public SupplierEntry toProto() {
+    return SupplierEntry.newBuilder().setId(getId()).setName(getName())
+        .setAddress(getAddress()).setCreatedTime(getCreatedTime().getTime())
+        .setUpdatedTime(getUpdatedTime().getTime()).build();
   }
 }
