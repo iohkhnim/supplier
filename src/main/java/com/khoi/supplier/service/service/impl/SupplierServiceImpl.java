@@ -27,6 +27,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<Supplier, Integer> impl
     this.productService = productService;
   }
 
+  @Override
   public Supplier findById(int id) {
     Supplier supplier = super.findByid(id);
 

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -69,5 +70,11 @@ public class SupplierController {
   public ResponseEntity<List<Supplier>> findAll() {
     List<Supplier> list = supplierService.findAll();
     return new ResponseEntity<List<Supplier>>(list, HttpStatus.OK);
+  }
+
+  @GetMapping("findById/{id}")
+  public ResponseEntity<Supplier> findByid(@PathVariable("id") int id) {
+    Supplier obj = supplierService.findById(id);
+    return new ResponseEntity<Supplier>(obj, HttpStatus.OK);
   }
 }
