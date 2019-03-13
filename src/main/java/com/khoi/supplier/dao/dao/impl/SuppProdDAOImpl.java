@@ -1,7 +1,6 @@
 package com.khoi.supplier.dao.dao.impl;
 
 import com.khoi.supplier.dao.ISuppProdDAO;
-import com.khoi.supplier.dto.Supplier;
 import com.khoi.supplier.dto.Supplier_Product;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

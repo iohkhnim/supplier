@@ -2,7 +2,6 @@ package com.khoi.supplier.dto;
 
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +13,7 @@ import javax.persistence.Table;
 public class Supplier_Product implements Serializable {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
   private int id;
 
