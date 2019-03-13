@@ -3,6 +3,7 @@ package com.khoi.supplier.service.service.impl;
 import com.khoi.supplier.dao.ISuppProdDAO;
 import com.khoi.supplier.dto.Supplier_Product;
 import com.khoi.supplier.service.ISuppProdService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,10 @@ public class SuppProdServiceImpl implements ISuppProdService {
     } catch (Exception ex) {
       return false;
     }
+  }
+
+  @Override
+  public List<Integer> getListProductIdBySupplierId( int supplier_id){
+    return suppProdDAO.getListProductIdBySupplierId(supplier_id);
   }
 }

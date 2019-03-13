@@ -2,8 +2,10 @@ package com.khoi.supplier.dao.dao.impl;
 
 import com.khoi.supplier.dao.ISuppProdDAO;
 import com.khoi.supplier.dto.Supplier_Product;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,5 +42,13 @@ public class SuppProdDAOImpl implements ISuppProdDAO {
     } catch (Exception ex) {
       return false;
     }
+  }
+
+  @Override
+  public List<Integer> getListProductIdBySupplierId(int supplier_id) {
+    String hql = "SELECT obj.product_id FROM Supplier_Product obj WHERE obj.supplier_id = :supid";
+    Query query = entityManager.createQuery(hql);
+    query.setParameter("supid", supplier_id);
+    return (List<Integer>)query.getResultList();
   }
 }
