@@ -3,6 +3,9 @@ package com.khoi.supplier.dto;
 import com.khoi.basecrud.dto.baseDTO;
 import com.khoi.supplierproto.SupplierEntry;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +24,11 @@ public class Supplier extends baseDTO implements Serializable {
 
   @Transient
   private List<String> products;
+
+  private String convertDate2String(Date date){
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    return dateFormat.format(date);
+  }
 
   public String getName() {
     return name;
@@ -48,7 +56,7 @@ public class Supplier extends baseDTO implements Serializable {
 
   public SupplierEntry toProto() {
     return SupplierEntry.newBuilder().setId(getId()).setName(getName())
-        .setAddress(getAddress()).setCreatedTime(getCreatedTime().getTime())
-        .setUpdatedTime(getUpdatedTime().getTime()).build();
+        .setAddress(getAddress()).setCreatedTime(convertDate2String(getCreatedTime()))
+        .setUpdatedTime(convertDate2String(getUpdatedTime())).build();
   }
 }
