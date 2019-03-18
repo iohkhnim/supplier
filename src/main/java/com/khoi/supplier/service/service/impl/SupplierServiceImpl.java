@@ -10,6 +10,7 @@ import com.khoi.supplier.service.ISuppProdService;
 import com.khoi.supplier.service.ISupplierService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -31,21 +32,16 @@ public class SupplierServiceImpl extends BaseServiceImpl<Supplier, Integer> impl
   public Supplier findById(int id) {
     Supplier supplier = super.findByid(id);
 
-    List<ProductEntry> productEntryList = new ArrayList<>();
     //get list of product
-    List<Integer> list = suppProdService.getListProductIdBySupplierId(id);
-    for (int i : list) {
-      productEntryList
-          .add(productService.getProduct(GetProductRequest.newBuilder().setProductId(i).build()));
-    }
+    List<Integer> idList = suppProdService.getListProductIdBySupplierId(id);
 
-    List<String> productList = new ArrayList<>();
-    for (ProductEntry entry : productEntryList) {
-      productList.add(new JsonFormat().printToString(entry));
-    }
+    List<ProductEntry> productEntryList = idList.stream().map(p -> productService.getProduct(
+        GetProductRequest.newBuilder().setProductId(p).build())).collect(Collectors.toList());
 
+    List<String> productList = productEntryList.stream().map(p -> new JsonFormat().printToString(p))
+        .collect(Collectors.toList());
     supplier.setProducts(productList);
-    
+
     return supplier;
   }
 }
