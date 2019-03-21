@@ -13,13 +13,13 @@ public class ApplicationConfig {
   private final String productServiceEndpoint = "localhost:6575";
 
   @Bean(name = "productChannel")
-  Channel priceChannel() {
+  Channel productChannel() {
     return ManagedChannelBuilder.forTarget(productServiceEndpoint).usePlaintext().build();
   }
 
   @Bean(name = "productService")
   @Qualifier("productChannel")
-  ProductServiceGrpc.ProductServiceBlockingStub priceService(Channel priceChannel) {
-    return ProductServiceGrpc.newBlockingStub(priceChannel);
+  ProductServiceGrpc.ProductServiceBlockingStub priceService(Channel productChannel) {
+    return ProductServiceGrpc.newBlockingStub(productChannel);
   }
 }

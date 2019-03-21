@@ -5,4 +5,5 @@ import com.khoi.supplier.dto.Supplier;
 
 public interface ISupplierDAO extends IBaseDAO<Supplier, Integer> {
 
+  String getSupplierNameById(int supplier_id);
 }

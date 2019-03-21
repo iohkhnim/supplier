@@ -4,6 +4,8 @@ import com.khoi.supplier.dao.ISuppProdDAO;
 import com.khoi.supplier.dao.ISupplierDAO;
 import com.khoi.supplier.dto.Supplier;
 import com.khoi.supplierproto.GetSupplierListRequest;
+import com.khoi.supplierproto.GetSupplierNameByIdRequest;
+import com.khoi.supplierproto.GetSupplierNameByIdResponse;
 import com.khoi.supplierproto.SupplierEntry;
 import com.khoi.supplierproto.SupplierServiceGrpc;
 import io.grpc.stub.StreamObserver;
@@ -33,6 +35,15 @@ public class SupplierServiceGrpcImpl extends SupplierServiceGrpc.SupplierService
       responseObserver.onNext(e.toProto());
     });
     responseObserver.onCompleted();
+  }
+
+  @Override
+  public void getSupplierNameById(GetSupplierNameByIdRequest request,
+      StreamObserver<GetSupplierNameByIdResponse> streamObserver) {
+    String supplier_name = supplierDAO.getSupplierNameById(request.getSupplierId());
+    streamObserver.onNext(
+        GetSupplierNameByIdResponse.newBuilder().setSupplierName(supplier_name).buildPartial());
+    streamObserver.onCompleted();
   }
 
 }
