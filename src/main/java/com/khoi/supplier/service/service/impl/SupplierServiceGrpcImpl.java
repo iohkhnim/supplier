@@ -23,6 +23,14 @@ public class SupplierServiceGrpcImpl extends SupplierServiceGrpc.SupplierService
   @Autowired
   ISuppProdDAO suppProdDAO;
 
+  /**
+   * <p>This method gets supplier ID list that supply given product</p>
+   *
+   * @param request Contains product ID needs to be retrieved supplier ID list that supply this
+   * product
+   * @param responseObserver Contains List of supplier ID supply given product and send back to gRPC
+   * client
+   */
   @Override
   public void getSupplierListByProductId(GetSupplierListRequest request,
       StreamObserver<SupplierEntry> responseObserver) {
@@ -37,6 +45,12 @@ public class SupplierServiceGrpcImpl extends SupplierServiceGrpc.SupplierService
     responseObserver.onCompleted();
   }
 
+  /**
+   * <p>This method gets Supplier name of given supplier ID</p>
+   *
+   * @param request Contains supplier ID needs to retrieves its name
+   * @param streamObserver Contains name of given supplier ID and send it back to gRPC client
+   */
   @Override
   public void getSupplierNameById(GetSupplierNameByIdRequest request,
       StreamObserver<GetSupplierNameByIdResponse> streamObserver) {

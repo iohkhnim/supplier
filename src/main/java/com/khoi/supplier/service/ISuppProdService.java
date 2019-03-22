@@ -10,4 +10,6 @@ public interface ISuppProdService {
   Boolean update(Supplier_Product sp);
 
   List<Integer> getListProductIdBySupplierId(int supplier_id);
+
+  List<Integer> getListSupplierIdByProductId(int product_id);
 }

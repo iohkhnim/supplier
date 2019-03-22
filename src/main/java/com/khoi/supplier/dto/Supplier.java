@@ -25,6 +25,11 @@ public class Supplier extends baseDTO implements Serializable {
   @Transient
   private List<String> products;
 
+  /**
+   * <p>This method convert date in Date type to date in String type</p>
+   * @param date date in Date type
+   * @return date in String type
+   */
   private String convertDate2String(Date date){
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     return dateFormat.format(date);
@@ -54,6 +59,10 @@ public class Supplier extends baseDTO implements Serializable {
     this.products = products;
   }
 
+  /**
+   * <p>This method maps Supplier type to SupplierEntry type</p>
+   * @return SupplierEntry object
+   */
   public SupplierEntry toProto() {
     return SupplierEntry.newBuilder().setId(getId()).setName(getName())
         .setAddress(getAddress()).setCreatedTime(convertDate2String(getCreatedTime()))

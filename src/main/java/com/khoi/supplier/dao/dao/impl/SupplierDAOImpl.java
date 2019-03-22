@@ -11,6 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class SupplierDAOImpl extends BaseDAOImpl<Supplier, Integer> implements ISupplierDAO {
 
+  /**
+   * <p>This method gets Supplier name of given supplier ID</p>
+   * @param supplier_id supplier ID needs to retrieves its name
+   * @return supplier name of an given supplier ID
+   */
   @Override
   public String getSupplierNameById(int supplier_id) {
     String hql = "SELECT o.name FROM Supplier o WHERE o.id = :id";
