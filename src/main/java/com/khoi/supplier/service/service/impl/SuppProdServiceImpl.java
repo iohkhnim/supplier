@@ -14,10 +14,7 @@ public class SuppProdServiceImpl implements ISuppProdService {
   private ISuppProdDAO suppProdDAO;
 
   /**
-   * <p>This method passes value to DAO in order to create a Supplier_Product in database</p>
-   *
-   * @param sp Supplier_Product object contains information
-   * @return Return a boolean value according to result
+   * {@inheritDoc}
    */
   @Override
   public Boolean create(Supplier_Product sp) {
@@ -30,10 +27,7 @@ public class SuppProdServiceImpl implements ISuppProdService {
   }
 
   /**
-   * <p>This method passes value to DAO in order to update a Supplier_Product in database</p>
-   *
-   * @param sp Supplier_Product object contains information
-   * @return Return a boolean value according to result
+   * {@inheritDoc}
    */
   @Override
   public Boolean update(Supplier_Product sp) {
@@ -46,11 +40,7 @@ public class SuppProdServiceImpl implements ISuppProdService {
   }
 
   /**
-   * <p>This method passes value to DAO in order to get a list of product ID sold by given
-   * supplier</p>
-   *
-   * @param supplier_id supplier ID needs to be retrieved its product id
-   * @return List of product ID sold by given supplier
+   * {@inheritDoc}
    */
   @Override
   public List<Integer> getListProductIdBySupplierId(int supplier_id) {
@@ -58,11 +48,7 @@ public class SuppProdServiceImpl implements ISuppProdService {
   }
 
   /**
-   * <p>This method passes value to DAO in order to get a list of supplier ID supply given
-   * product</p>
-   *
-   * @param product_id product ID needs to be retrieves its suppliers
-   * @return List of supplier ID supply given product
+   * {@inheritDoc}
    */
   @Override
   public List<Integer> getListSupplierIdByProductId(int product_id) {

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class SupplierServiceImpl extends BaseServiceImpl<Supplier, Integer> implements
     ISupplierService {
 
-  @Qualifier("poductService")
+  @Qualifier("productService")
   private final ProductServiceGrpc.ProductServiceBlockingStub productService;
   @Autowired
   ISuppProdService suppProdService;
@@ -27,6 +27,9 @@ public class SupplierServiceImpl extends BaseServiceImpl<Supplier, Integer> impl
     this.productService = productService;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Supplier findById(int id) {
     Supplier supplier = super.findByid(id);
