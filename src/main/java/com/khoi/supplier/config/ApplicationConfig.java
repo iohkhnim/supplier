@@ -1,4 +1,4 @@
-package com.khoi.supplier;
+package com.khoi.supplier.config;
 
 import com.khoi.productproto.ProductServiceGrpc;
 import io.grpc.Channel;
