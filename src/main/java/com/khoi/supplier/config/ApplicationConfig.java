@@ -14,9 +14,9 @@ import java.io.File;
 @Configuration
 public class ApplicationConfig {
 
-  private final String productServiceEndpoint = "localhost:6575";
+  private final String productServiceEndpoint = "172.17.0.2:6565";
 
-  private final String productServerKeyPath = "src/main/java/com/khoi/supplier/key/ca.crt";
+  private final String productServerKeyPath = "key/product.crt";
 
   @Bean(name = "productChannel")
   Channel productChannel() throws Exception {

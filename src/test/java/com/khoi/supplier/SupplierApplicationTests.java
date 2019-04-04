@@ -1,4 +1,4 @@
-package com.khoi.supplier;
+/*package com.khoi.supplier;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,3 +14,4 @@ public class SupplierApplicationTests {
   }
 
 }
+*/
