@@ -63,8 +63,8 @@ public class SupplierController {
    */
   @PostMapping("create")
   public ResponseEntity<Void> create(@RequestBody Supplier supplier) {
-    Boolean flag = supplierService.create(supplier);
-    if (flag.equals(true)) {
+    int id = supplierService.create(supplier);
+    if (id > 0) {
       return new ResponseEntity<Void>(HttpStatus.OK);
     } else {
       return new ResponseEntity<Void>(HttpStatus.CONFLICT);

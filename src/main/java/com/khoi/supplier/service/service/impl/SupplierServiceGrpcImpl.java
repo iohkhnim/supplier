@@ -3,11 +3,7 @@ package com.khoi.supplier.service.service.impl;
 import com.khoi.supplier.dao.ISuppProdDAO;
 import com.khoi.supplier.dao.ISupplierDAO;
 import com.khoi.supplier.dto.Supplier;
-import com.khoi.supplierproto.GetSupplierListRequest;
-import com.khoi.supplierproto.GetSupplierNameByIdRequest;
-import com.khoi.supplierproto.GetSupplierNameByIdResponse;
-import com.khoi.supplierproto.SupplierEntry;
-import com.khoi.supplierproto.SupplierServiceGrpc;
+import com.khoi.supplierproto.*;
 import io.grpc.stub.StreamObserver;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,6 +54,15 @@ public class SupplierServiceGrpcImpl extends SupplierServiceGrpc.SupplierService
     streamObserver.onNext(
         GetSupplierNameByIdResponse.newBuilder().setSupplierName(supplier_name).buildPartial());
     streamObserver.onCompleted();
+  }
+
+  @Override
+  public void deleteSPByProductId(DeleteSPRequest request, StreamObserver<DeleteSPResponse> streamObserver ) {
+    int result = suppProdDAO.deleteByProductId(request.getProductId());
+    if(result >= 0) {
+      streamObserver.onNext(DeleteSPResponse.newBuilder().setResponse(result).build());
+      streamObserver.onCompleted();
+    }
   }
 
 }

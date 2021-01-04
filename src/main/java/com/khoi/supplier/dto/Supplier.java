@@ -25,6 +25,17 @@ public class Supplier extends baseDTO implements Serializable {
   @Transient
   private List<String> products;
 
+  public int getProduct_id() {
+    return product_id;
+  }
+
+  public void setProduct_id(int product_id) {
+    this.product_id = product_id;
+  }
+
+  @Transient
+  private int product_id;
+
   /**
    * <p>This method convert date in Date type to date in String type</p>
    * @param date date in Date type

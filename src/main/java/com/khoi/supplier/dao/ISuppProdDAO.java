@@ -36,4 +36,6 @@ public interface ISuppProdDAO {
    * @return List of supplier ID supply given product
    */
   List<Integer> getListSupplierIdByProductId(int product_id);
+
+  int deleteByProductId(int product_id);
 }

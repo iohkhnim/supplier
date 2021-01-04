@@ -2,22 +2,22 @@ package com.khoi.supplier.dao.dao.impl;
 
 import com.khoi.supplier.dao.ISuppProdDAO;
 import com.khoi.supplier.dto.Supplier_Product;
-import java.util.List;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 @Transactional
 @Repository
 public class SuppProdDAOImpl implements ISuppProdDAO {
 
-  @PersistenceContext
-  private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
 
   /**
-   * <p>This method get a supplier_product information</p>
+   * This method get a supplier_product information
    *
    * @param id supplier_product id needs to be retrieved information
    * @return Return a Supplier_Product object
@@ -27,9 +27,7 @@ public class SuppProdDAOImpl implements ISuppProdDAO {
     return sp;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  /** {@inheritDoc} */
   @Override
   public Boolean create(Supplier_Product sp) {
     try {
@@ -40,25 +38,19 @@ public class SuppProdDAOImpl implements ISuppProdDAO {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  /** {@inheritDoc} */
   @Override
   public Boolean update(Supplier_Product sp) {
     try {
-      Supplier_Product sp_old = findByid(sp.getSupplier_id());
-      sp_old.setProduct_id(sp.getProduct_id());
-      sp_old.setSupplier_id(sp.getSupplier_id());
-      entityManager.merge(sp_old);
+      entityManager.find(Supplier_Product.class, sp.getId());
+      entityManager.merge(sp);
       return true;
     } catch (Exception ex) {
       return false;
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  /** {@inheritDoc} */
   @Override
   public List<Integer> getListProductIdBySupplierId(int supplier_id) {
     String hql = "SELECT obj.product_id FROM Supplier_Product obj WHERE obj.supplier_id = :supid";
@@ -67,14 +59,20 @@ public class SuppProdDAOImpl implements ISuppProdDAO {
     return (List<Integer>) query.getResultList();
   }
 
-  /**
-   * {@inheritDoc}
-   */
+  /** {@inheritDoc} */
   @Override
   public List<Integer> getListSupplierIdByProductId(int product_id) {
     String hql = "SELECT obj.supplier_id FROM Supplier_Product obj WHERE obj.product_id = :prodid";
     Query query = entityManager.createQuery(hql);
     query.setParameter("prodid", product_id);
     return (List<Integer>) query.getResultList();
+  }
+
+  @Override
+  public int deleteByProductId(int product_id) {
+    String hql = "DELETE FROM Supplier_Product obj WHERE obj.product_id = :prodid";
+    Query query = entityManager.createQuery(hql);
+    query.setParameter("prodid", product_id);
+    return query.executeUpdate();
   }
 }

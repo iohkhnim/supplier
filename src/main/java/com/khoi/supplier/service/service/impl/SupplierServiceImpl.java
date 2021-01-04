@@ -1,5 +1,6 @@
 package com.khoi.supplier.service.service.impl;
 
+import com.fasterxml.jackson.databind.ser.std.ObjectArraySerializer;
 import com.googlecode.protobuf.format.JsonFormat;
 import com.khoi.basecrud.service.service.impl.BaseServiceImpl;
 import com.khoi.productproto.GetProductRequest;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import com.khoi.supplier.dto.Supplier_Product;
 
 @Service
 public class SupplierServiceImpl extends BaseServiceImpl<Supplier, Integer> implements
@@ -25,6 +27,33 @@ public class SupplierServiceImpl extends BaseServiceImpl<Supplier, Integer> impl
 
   public SupplierServiceImpl(ProductServiceGrpc.ProductServiceBlockingStub productService) {
     this.productService = productService;
+  }
+
+  @Override
+  public Boolean update(Supplier supplier) {
+    if(super.update(supplier)) {
+      Supplier_Product sp = new Supplier_Product();
+      sp.setProduct_id(supplier.getProduct_id());
+      sp.setSupplier_id(supplier.getId());
+      suppProdService.update(sp);
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public int create(Supplier supplier) {
+    int id = super.create(supplier);
+    if(id > 0) {
+      if (supplier.getProduct_id() > 0) {
+        Supplier_Product sp = new Supplier_Product();
+        sp.setProduct_id(supplier.getProduct_id());
+        sp.setSupplier_id(id);
+        suppProdService.create(sp);
+      }
+      return id;
+    }
+    return -1;
   }
 
   /**
